@@ -49,7 +49,6 @@ classdef ukPSM < PSM
     
     % PSM methods
     methods
-        
         % State indices
         getStateIndices( obj, ensMeta, sstName, monthMeta, varargin );
         
@@ -59,11 +58,5 @@ classdef ukPSM < PSM
         % Run the forward model
         [uk, R] = runForwardModel( obj, M, ~, ~ );
         
-    end
-        
-    % Static call to the forward model function
-    methods (Static)
-        uk = UK_forward_model( ssts, bayes );
-    end
-            
+    end     
 end     

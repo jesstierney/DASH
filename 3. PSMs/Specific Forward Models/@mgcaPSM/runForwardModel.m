@@ -30,7 +30,7 @@ end
     SSS=mean(M(gots_t+12,:),1);
     % Run the forward model. Output is 1500 possible estimates for
     % each ensemble member (nEns x 1000)
-    mg = baymag_forward(obj.Age,SST,obj.Omega,SSS,obj.pH,obj.Clean,obj.Species,obj.SeaCorr,obj.PriorMean,obj.PriorStd,obj.bayes);
+    mg = baymag_forward_ln(obj.Age,SST,obj.Omega,SSS,obj.pH,obj.Clean,obj.Species,obj.SeaCorr,obj.PriorMean,obj.PriorStd,obj.bayes);
 
     % Estimate R from the variance of the model for each ensemble
     % member. (scalar)

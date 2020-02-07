@@ -7,10 +7,16 @@ ind = obj.seasonalPolygon;
 SST = mean( M(ind,:), 1 );
 
 % Run the forward model, estimate R from the variance of the estimate
-uk = ukPSM.UK_forward_model( SST, obj.bayesFile );
-R = mean( var(uk,[],1), 2 );
+uk = UK_forward( SST, obj.bayesFile );
+% Estimate R from the variance of the model for each ensemble
+    % member. (scalar)
+    R = mean( var(uk,[],2), 1);
 
-uk = mean( uk, 1 );
+    % Take the mean of the 1500 possible values for each ensemble
+    % member as the final estimate. (1 x nEns)
+    uk = mean(uk,2);
+    % transpose for Ye
+    uk = uk';
 end
 
 
