@@ -49,7 +49,13 @@ classdef (Abstract) dash < handle
         % Breaks an ensemble into mean and devations. Also variance.
         [Mmean, Mdev, Mvar] = decompose( M );
         
-        % Calculate localization weights
+        % Temporal localization weights
+        [weights, yloc] = temporalLocalization( siteTime, stateTime, R, scale );
+        
+        % Spatial localization weights
+        [weights, yloc] = spatialLocalization( siteCoord, stateCoord, R, scale );
+        
+        % Redirect of old method
         [weights, yloc] = localizationWeights( siteCoord, stateCoord, R, scale);
         
         % Error check Ye and R generation on the fly without crashing the analysis
@@ -63,6 +69,9 @@ classdef (Abstract) dash < handle
         
         % Checks if reconstructed indices include all PSM indices
         reconH = checkReconH( recon, F );
+        
+        % Error propagation for spatial means
+        [E, sigma] = uncertainMean( X, Xvar, dim, weights );
         
     end 
     
